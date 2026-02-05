@@ -1,13 +1,19 @@
 const { Pool } = require('pg');
 
 // PostgreSQL connection pool
-const pool = new Pool({
+const poolConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: process.env.DB_PORT || 5432,
   database: process.env.DB_NAME || 'funfun_game',
   user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
-});
+};
+
+// Only add password if it's provided
+if (process.env.DB_PASSWORD) {
+  poolConfig.password = process.env.DB_PASSWORD;
+}
+
+const pool = new Pool(poolConfig);
 
 // Initialize database schema
 async function initializeDatabase() {
