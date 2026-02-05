@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FunFun - Multiplayer Platformer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="menu" class="screen active">
+    <div class="menu-container">
+      <h1>FunFun Platformer</h1>
+      <p class="subtitle">Networked 4-Player Game</p>
+      
+      <div class="input-group">
+        <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20">
+      </div>
+
+      <div class="button-group">
+        <button id="createRoomBtn" class="btn btn-primary">Create Room</button>
+      </div>
+
+      <div class="divider">
+        <span>OR</span>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="roomCodeInput" placeholder="Enter room code" maxlength="6">
+      </div>
+      
+      <div class="button-group">
+        <button id="joinRoomBtn" class="btn btn-secondary">Join Room</button>
+      </div>
+
+      <div id="errorMessage" class="error-message"></div>
+    </div>
+  </div>
+
+  <div id="game" class="screen">
+    <div class="game-header">
+      <div class="room-info">
+        Room Code: <span id="currentRoomCode">------</span>
+      </div>
+      <div class="player-count">
+        Players: <span id="playerCount">0</span>/4
+      </div>
+      <button id="leaveRoomBtn" class="btn btn-small">Leave Room</button>
+    </div>
+    
+    <canvas id="gameCanvas" width="1600" height="900"></canvas>
+    
+    <div class="controls-info">
+      <p><strong>Controls:</strong> Arrow Keys or WASD to move, SPACE or UP to jump</p>
+    </div>
+
+    <div class="players-list">
+      <h3>Players in Room</h3>
+      <ul id="playersListItems"></ul>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/client.js"></script>
+</body>
+</html>
