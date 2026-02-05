@@ -61,13 +61,14 @@ function generateRoomCode() {
 
 // Create a new room
 async function createRoom() {
+  const MAX_ROOM_CODE_GENERATION_ATTEMPTS = 10;
   const client = await pool.connect();
   try {
     let roomCode;
     let created = false;
     let attempts = 0;
     
-    while (!created && attempts < 10) {
+    while (!created && attempts < MAX_ROOM_CODE_GENERATION_ATTEMPTS) {
       roomCode = generateRoomCode();
       try {
         const result = await client.query(

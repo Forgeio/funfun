@@ -28,6 +28,9 @@ const roomIntervals = new Map();
 function startGameLoop(roomCode) {
   if (roomIntervals.has(roomCode)) return; // Already running
 
+  // Simple fixed-rate game loop
+  // Note: For production, consider using a fixed timestep loop with interpolation
+  // to handle timing drift and ensure consistent physics
   const interval = setInterval(() => {
     const state = gameState.update(roomCode);
     if (state) {

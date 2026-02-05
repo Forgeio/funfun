@@ -104,7 +104,10 @@ class GameState {
   }
 
   // Update game physics for a single player
-  updatePlayerPhysics(player, deltaTime) {
+  updatePlayerPhysics(player) {
+    // Note: deltaTime parameter removed as we're using fixed timestep
+    // All physics calculations assume 60 ticks/second for consistency
+    
     // Apply horizontal movement
     if (player.inputs.left) {
       player.vx = -this.config.moveSpeed;
@@ -173,13 +176,12 @@ class GameState {
     if (!room) return null;
 
     const now = Date.now();
-    const deltaTime = (now - room.lastUpdateTime) / 1000;
     room.lastUpdateTime = now;
     room.tickCount++;
 
-    // Update all players
+    // Update all players with fixed timestep physics
     for (const [socketId, player] of room.players) {
-      this.updatePlayerPhysics(player, deltaTime);
+      this.updatePlayerPhysics(player);
     }
 
     return this.getState(roomCode);

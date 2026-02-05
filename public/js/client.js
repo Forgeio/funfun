@@ -14,8 +14,7 @@ const keys = {
   jump: false
 };
 
-// Client-side prediction
-let predictedState = null;
+// Last received server state
 let lastServerState = null;
 
 // Canvas and rendering
